@@ -573,8 +573,8 @@ function createVideoRow(text, url, videoTitle, filename, filesize) {
 
     let watchIcon = $('<i>').addClass('material-icons floatLeft').text('ondemand_video');
     watchButton.append(watchIcon);
-    let downToServerIcon = $('<i>').addClass('material-icons floatLeft').text('server_video');
-    serverDownButton.append(downToServerIcon)
+    let downToServerIcon = $('<i>').addClass('material-icons').text('ondemand_video');
+    serverDownButton.append(downToServerIcon);
 
     let downloadButton = $('<a>', {
         target: '_blank',
@@ -591,7 +591,7 @@ function createVideoRow(text, url, videoTitle, filename, filesize) {
 
     tableRow.append($('<td>').text(text));
     tableRow.append(filesizeCell);
-    tableRow.append($('<td>').append($('<div>').append(watchButton).append(downloadButton).append(serverDownButton).addClass('watchDownloadField')));
+    tableRow.append($('<td>').append($('<div>').append(watchButton).append(serverDownButton).append(downloadButton).addClass('watchDownloadField')));
 
     return tableRow;
 }
