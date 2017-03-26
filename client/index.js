@@ -840,7 +840,7 @@ function toggleVideoPause() {
 }
 
 function downToServerVideo(title, url) {
-    $.post(window.location.host + '/serverdownload', {downloadUrl: url, title: title} )
+    $.post('http://' + window.location.host + '/serverdownload', {downloadUrl: url, title: title} )
         .done(function(response) {
             console.log(response);
     });
