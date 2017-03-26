@@ -79,6 +79,24 @@ app.get('/stats', function(req, res) {
     res.send(`Socket.io connections: ${io.engine.clientsCount}`);
 });
 
+app.get('/serverdownload/:downloadUrl', function(req, res) {
+    let url = URL.parse(req.params.downloadUrl);
+    http.get({
+        host: url.host,
+        port: url.port | 80,
+        path: url.pathname
+    }, function(response) {
+        let file = fs.createWriteStream('/opt/mediathekviewweb/data/' + url.pathname.split('/').pop());
+        response.on('data', function(data) {
+            file.write(data);
+        }).on('end', function() {
+            file.end();
+        });
+    });
+    res.send(`will download video  ${url.pathname}`);
+});
+
+
 app.get('/feed', function(req, res) {
     rssFeedGenerator.createFeed(req.protocol + '://' + req.get('host') + req.originalUrl, (err, result) => {
         if (err) {
