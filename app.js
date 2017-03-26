@@ -79,8 +79,8 @@ app.get('/stats', function(req, res) {
     res.send(`Socket.io connections: ${io.engine.clientsCount}`);
 });
 
-app.get('/serverdownload/:downloadUrl', function(req, res) {
-    let url = URL.parse(req.params.downloadUrl);
+app.post('/serverdownload', function(req, res) {
+    let url = URL.parse(req.body.downloadUrl);
     http.get({
         host: url.host,
         port: url.port | 80,
